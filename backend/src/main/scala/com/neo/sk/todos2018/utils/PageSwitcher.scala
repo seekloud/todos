@@ -1,15 +1,12 @@
-package com.neo.sk.todos2018.front
+package com.neo.sk.todos2018.utils
 
-import MainEnter.getCurrentHash
 import mhtml.{Rx, Var}
 import org.scalajs.dom
 import org.scalajs.dom.raw.Event
 
-import scala.xml.Elem
-
 /**
   * User: Taoz
-  * Date: 6/3/2017
+  * Date: 4/15/2018
   * Time: 1:46 PM
   */
 trait PageSwitcher{
@@ -22,7 +19,7 @@ trait PageSwitcher{
 
 }
 
-object PageSwitcher {
+object PageSwitcher extends PageSwitcher{
   private val currentPageHash: Var[List[String]] = Var(Nil)
 
 
@@ -40,7 +37,7 @@ object PageSwitcher {
     }
   }
 
-  def switchPageByHash(): Unit = {
+  override def switchPageByHash(): Unit = {
     println("PageSwitcher.switchPageByHash: " + getCurrentHash)
     currentPageHash := hashStr2Seq(getCurrentHash).toList
   }
@@ -51,4 +48,5 @@ object PageSwitcher {
   }
 
 }
+
 
