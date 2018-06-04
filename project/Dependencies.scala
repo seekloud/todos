@@ -7,13 +7,13 @@ import sbt._
   */
 object Dependencies {
 
+  val slickV = "3.2.3"
+  val akkaV = "2.5.12"
+  val akkaHttpV = "10.1.1"
+  val scalaXmlV = "1.1.0"
+  val circeVersion = "0.9.3"
 
 
-
-  val slickV = "3.2.1"
-  val akkaV = "2.5.11"
-  val akkaHttpV = "10.1.0"
-  val circeVersion = "0.8.0"
 
   val scalaJsDomV = "0.9.2"
   val scalaTagsV = "0.6.5"
@@ -22,14 +22,12 @@ object Dependencies {
 
   val akkaSeq = Seq(
     "com.typesafe.akka" %% "akka-actor" % akkaV withSources (),
-    //"com.typesafe.akka" %% "akka-typed" % akkaV withSources (),
     "com.typesafe.akka" %% "akka-actor-typed" % akkaV withSources (),
     "com.typesafe.akka" %% "akka-slf4j" % akkaV,
     "com.typesafe.akka" %% "akka-stream" % akkaV
   )
 
   val akkaHttpSeq = Seq(
-    "com.typesafe.akka" %% "akka-http-core" % akkaHttpV,
     "com.typesafe.akka" %% "akka-http" % akkaHttpV,
     "com.typesafe.akka" %% "akka-http-testkit" % akkaHttpV
   )
@@ -54,6 +52,7 @@ object Dependencies {
   val postgresql = "org.postgresql" % "postgresql" % "9.4.1208"
   val asynchttpclient = "org.asynchttpclient" % "async-http-client" % "2.0.32"
   val ehcache = "net.sf.ehcache" % "ehcache" % "2.10.4"
+
 
 
   val backendDependencies =
