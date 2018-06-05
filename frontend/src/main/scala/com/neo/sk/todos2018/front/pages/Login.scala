@@ -11,6 +11,7 @@ import io.circe.generic.auto._
 import io.circe.syntax._
 import io.circe.parser._
 import scala.concurrent.ExecutionContext.Implicits.global
+import com.neo.sk.todos2018.front.styles.LoginStyles._
 /**
   * Created by haoshuhan on 2018/6/4.
   */
@@ -23,6 +24,7 @@ object Login extends Index{
       case Right(rsp) =>
         if(rsp.errCode == 0) {
           JsFunc.alert("登录成功！")
+          dom.window.location.hash = s"#/List/$username"
         } else if(rsp.errCode == 100102){
           JsFunc.alert(s"用户名不存在!")
         } else if(rsp.errCode == 100103){
@@ -39,17 +41,18 @@ object Login extends Index{
 
   def app: xml.Node = {
     <div>
-        <div class="login">
-          <div class="login_name">
-            <p>欢迎登录</p>
-          </div>
-          <input id="username"  placeholder="用户名"></input>
-          <input id="password"  placeholder="密码"></input>
-          <button class="login_button" style="width: 100%; height: 50px;" type ="submit" onclick={()=>login()}>登录</button>
-
+      <div>
+        <div class={welcome.htmlClass}>欢迎登录</div>
+      </div>
+      <div>
+        <div class={container.htmlClass}>用户名：<input class={input.htmlClass} id="username"></input>
         </div>
+        <div class={container.htmlClass}>
+          <pre>密  码：<input class={input.htmlClass} id="password"></input>
+          </pre>
+        </div>
+      </div>
+      <button class={button.htmlClass} onclick={() => login()}>登录</button>
     </div>
-
-
   }
 }

@@ -29,7 +29,7 @@ trait HttpService extends ResourceService
   val routes: Route =
     ignoreTrailingSlash {
       pathPrefix("todos2018") {
-        (path ("index") & get) {
+        pathEndOrSingleSlash {
           getFromResource("html/index.html")
         } ~
           resourceRoutes ~ userRoutes ~ listRoutes

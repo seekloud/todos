@@ -35,6 +35,7 @@ lazy val frontend = (project in file("frontend"))
       Seq(
         fullOptJS,
         fastOptJS,
+        scalaJSUseMainModuleInitializer,
         packageJSDependencies,
         packageMinifiedJSDependencies
       ).map(f => (crossTarget in f) ~= (_ / "sjsout"))
