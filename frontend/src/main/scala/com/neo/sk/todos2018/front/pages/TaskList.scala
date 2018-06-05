@@ -60,8 +60,10 @@ class TaskList(username: String) extends Index{
     Http.getAndParse[GetListRsp](Routes.List.getList).map {
       case Right(rsp) =>
         if(rsp.errCode == 0){
-          taskList := rsp.list
+          taskList := rsp.list.get
         } else {
+          JsFunc.alert(rsp.msg)
+          dom.window.location.hash = s"#/Login"
           println(rsp.msg)
         }
       case Left(error) =>
@@ -93,6 +95,7 @@ class TaskList(username: String) extends Index{
   }
 
   def app: xml.Node = {
+   getList
   <div>
     <div style="margin:30px;font-size:25px;">任务记录</div>
     <div style="margin-left:30px;">

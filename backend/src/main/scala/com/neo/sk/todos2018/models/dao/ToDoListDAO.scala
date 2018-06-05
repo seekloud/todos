@@ -19,11 +19,11 @@ import scala.collection.mutable
   */
 object ToDoListDAO {
   private val log = LoggerFactory.getLogger(this.getClass)
-  private val listMap:mutable.HashSet[(String,String,Long)]=mutable.HashSet() //(name,record,time)
+  private val list:mutable.HashSet[(String,String,Long)]=mutable.HashSet() //(name,record,time)
 
   def addRecord(userName:String,record:String)={
     try {
-      listMap.add(userName,record,System.currentTimeMillis())
+      list.add(userName,record,System.currentTimeMillis())
       Future(1)
     } catch {
       case  e: Throwable =>
@@ -34,7 +34,7 @@ object ToDoListDAO {
 
   def delRecord(userName:String,record:String,time:Long)={
     try {
-      listMap.remove(userName,record,time)
+      list.remove(userName,record,time)
       Future(1)
     } catch {
       case  e: Throwable =>
@@ -45,7 +45,7 @@ object ToDoListDAO {
 
   def getRecordList(userName:String)={
     try{
-      Future(listMap.filter(_._1==userName).map(r=>(r._2,r._3)).toList.sortBy(_._2))
+      Future(list.filter(_._1==userName).map(r=>(r._2,r._3)).toList.sortBy(_._2))
     } catch {
       case e: Throwable=>
         log.error(s"get recordList error with error $e")
