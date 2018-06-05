@@ -7,7 +7,6 @@ import akka.http.scaladsl.Http
 import akka.stream.ActorMaterializer
 import akka.util.Timeout
 import com.neo.sk.todos2018.service.HttpService
-
 import scala.language.postfixOps
 import scala.util.{Failure, Success}
 
