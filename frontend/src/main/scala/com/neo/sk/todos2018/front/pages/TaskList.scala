@@ -94,16 +94,32 @@ class TaskList(username: String) extends Index{
     </div>
   }
 
+  def logout(): Unit = {
+    Http.getAndParse[SuccessRsp](Routes.User.logout).map {
+      case Right(rsp) =>
+        if(rsp.errCode == 0) {
+          JsFunc.alert("退出成功")
+          dom.window.location.hash = s"#/Login"
+        } else {
+          JsFunc.alert("退出失败")
+          println(s"logout error, ${rsp.msg}")
+        }
+
+      case Left(e) =>
+        println(s"parse error,$e ")
+    }
+  }
+
   def app: xml.Node = {
    getList
   <div>
+    <div>
+      <button class={logoutButton.htmlClass} onclick={()=>logout()}>退出</button></div>
     <div style="margin:30px;font-size:25px;">任务记录</div>
     <div style="margin-left:30px;">
       <input class={input.htmlClass} onchange={(e: dom.Event) => inputValue = e.target.asInstanceOf[Input].value}></input>
     <button class={addButton.htmlClass} onclick={()=>addRecord}>+添加</button>
     </div>
-
-
     {taskListRx}
   </div>
   }
