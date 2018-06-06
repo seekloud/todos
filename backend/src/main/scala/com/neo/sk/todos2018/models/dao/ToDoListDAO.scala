@@ -24,32 +24,32 @@ object ToDoListDAO {
   def addRecord(userName:String,record:String)={
     try {
       list.add(userName,record,System.currentTimeMillis())
-      Future(1)
+      Future.successful(1)
     } catch {
       case  e: Throwable =>
         log.error(s"add record error with error $e")
-        Future(-1)
+        Future.successful(-1)
     }
   }
 
   def delRecord(userName:String,record:String,time:Long)={
     try {
       list.remove(userName,record,time)
-      Future(1)
+      Future.successful(1)
     } catch {
       case  e: Throwable =>
         log.error(s"del record error with error $e")
-        Future(-1)
+        Future.successful(-1)
     }
   }
 
   def getRecordList(userName:String)={
     try{
-      Future(list.filter(_._1==userName).map(r=>(r._2,r._3)).toList.sortBy(_._2))
+      Future.successful(list.filter(_._1==userName).map(r=>(r._2,r._3)).toList.sortBy(_._2))
     } catch {
       case e: Throwable=>
         log.error(s"get recordList error with error $e")
-        Future(Nil)
+        Future.successful(Nil)
     }
   }
 
