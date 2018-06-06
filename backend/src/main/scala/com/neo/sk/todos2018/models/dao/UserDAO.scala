@@ -15,6 +15,6 @@ import com.neo.sk.todos2018.common.AppSettings
   */
 object UserDAO {
   def getUserByName(name:String)={
-    Future(AppSettings.userMap.get(name))
+    Future.successful(AppSettings.userMap.get(name))
   }
 }
