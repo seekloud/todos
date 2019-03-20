@@ -5,7 +5,6 @@ import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server.{Directive, Directive1, RequestContext}
 import akka.http.scaladsl.server.directives.BasicDirectives
 import com.neo.sk.todos2018.common.AppSettings
-import com.neo.sk.todos2018.common.Constant.UserRolesType
 import com.neo.sk.todos2018.ptcl.UserProtocol.UserBaseInfo
 import com.neo.sk.todos2018.shared.ptcl.ErrorRsp
 import com.neo.sk.todos2018.utils.{CirceSupport, SessionSupport}

@@ -7,17 +7,17 @@ import sbt._
   */
 object Dependencies {
 
-  val slickV = "3.2.3"
-  val akkaV = "2.5.12"
-  val akkaHttpV = "10.1.1"
-  val scalaXmlV = "1.1.0"
-  val circeVersion = "0.9.3"
+  val slickV = "3.3.0"
+  val akkaV = "2.5.21"
+  val akkaHttpV = "10.1.7"
+  val scalaXmlV = "1.1.1"
+  val circeVersion = "0.11.1"
 
 
 
-  val scalaJsDomV = "0.9.2"
+  val scalaJsDomV = "0.9.6"
   val scalaTagsV = "0.6.5"
-  val diodeV = "1.1.2"
+  val diodeV = "1.1.4"
 
 
   val akkaSeq = Seq(
@@ -38,20 +38,20 @@ object Dependencies {
     "io.circe" %% "circe-parser" % circeVersion
   )
 
-  val scalaXml = "org.scala-lang.modules" %% "scala-xml" % "1.0.6"
-  val slick = "com.typesafe.slick" %% "slick" % "3.2.1"
-  val slickCodeGen = "com.typesafe.slick" %% "slick-codegen" % "3.2.1"
-  val scalikejdbc = "org.scalikejdbc" %% "scalikejdbc" % "2.5.0"
-  val scalikejdbcConfig = "org.scalikejdbc" %% "scalikejdbc-config" % "2.5.0"
+  val scalaXml = "org.scala-lang.modules" %% "scala-xml" % "1.1.1"
+  val slick = "com.typesafe.slick" %% "slick" % "3.3.0"
+  val slickCodeGen = "com.typesafe.slick" %% "slick-codegen" % "3.3.0"
+  val scalikejdbc = "org.scalikejdbc" %% "scalikejdbc" % "3.3.3"
+  val scalikejdbcConfig = "org.scalikejdbc" %% "scalikejdbc-config" % "3.3.3"
 
-  val scalatags = "com.lihaoyi" %% "scalatags" % "0.6.5"
-  val nscalaTime = "com.github.nscala-time" %% "nscala-time" % "2.16.0"
-  val hikariCP = "com.zaxxer" % "HikariCP" % "2.6.2"
+  val scalatags = "com.lihaoyi" %% "scalatags" % "0.6.7"
+  val nscalaTime = "com.github.nscala-time" %% "nscala-time" % "2.22.0"
+  val hikariCP = "com.zaxxer" % "HikariCP" % "3.3.1"
   val logback = "ch.qos.logback" % "logback-classic" % "1.2.3"
-  val codec = "commons-codec" % "commons-codec" % "1.10"
-  val postgresql = "org.postgresql" % "postgresql" % "9.4.1208"
-  val asynchttpclient = "org.asynchttpclient" % "async-http-client" % "2.0.32"
-  val ehcache = "net.sf.ehcache" % "ehcache" % "2.10.4"
+  val codec = "commons-codec" % "commons-codec" % "1.12"
+  val postgresql = "org.postgresql" % "postgresql" % "42.2.5"
+  val asynchttpclient = "org.asynchttpclient" % "async-http-client" % "2.8.1"
+  val ehcache = "net.sf.ehcache" % "ehcache" % "2.10.6"
 
 
 
