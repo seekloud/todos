@@ -34,7 +34,6 @@ object AppSettings {
   val config = ConfigFactory.parseResources("product.conf").withFallback(ConfigFactory.load())
 
   val appConfig = config.getConfig("app")
-  val dependence = config.getConfig("dependence")
 
 
   val httpInterface = appConfig.getString("http.interface")
