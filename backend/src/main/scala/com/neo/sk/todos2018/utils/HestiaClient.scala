@@ -4,11 +4,6 @@ import java.io.File
 
 import com.neo.sk.todos2018.common.AppSettings._
 import org.slf4j.LoggerFactory
-import com.neo.sk.todos2018.utils.HttpUtil._
-import com.neo.sk.todos2018.utils.HttpUtil
-
-import com.neo.sk.todos2018.utils.SecureUtil
-import com.neo.sk.todos2018.utils.HttpUtil.Imports._
 import io.circe.syntax._
 
 import scala.concurrent.ExecutionContext.Implicits.global
