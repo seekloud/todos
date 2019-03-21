@@ -64,14 +64,4 @@ object AppSettings {
   )
   val sessionTimeOut = sConf.getInt("sessionTimeOut")
 
-
-  val hestiaConfig = config.getConfig("hestia")
-  val hestiaProtocol = hestiaConfig.getString("protocol")
-  val hestiaHost = hestiaConfig.getString("host")
-  val hestiaPort = hestiaConfig.getString("port")
-  val hestiaDomain = hestiaConfig.getString("domain")
-  val hestiaAppId = hestiaConfig.getString("appId")
-  val hestiaSecureKey = hestiaConfig.getString("secureKey")
-  val hestiaAddress = hestiaConfig.getString("address")
-
 }
