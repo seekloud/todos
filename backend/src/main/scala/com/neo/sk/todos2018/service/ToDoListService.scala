@@ -11,7 +11,6 @@ import com.neo.sk.todos2018.ptcl.UserProtocol.UserBaseInfo
 import com.neo.sk.todos2018.service.SessionBase.ToDoListSession
 import com.neo.sk.todos2018.shared.ptcl.ToDoListProtocol.{AddRecordReq, DelRecordReq, GetListRsp}
 import com.neo.sk.todos2018.shared.ptcl.{ErrorRsp, SuccessRsp}
-import com.neo.sk.todos2018.shared.ptcl.UserProtocol.UserLoginReq
 
 import scala.concurrent.Future
 import scala.language.postfixOps

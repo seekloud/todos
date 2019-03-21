@@ -5,8 +5,7 @@ import akka.http.scaladsl.server
 import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server.ValidationRejection
 import com.neo.sk.todos2018.common.AppSettings
-import com.neo.sk.todos2018.utils.SecureUtil.PostEnvelope
-import com.neo.sk.todos2018.utils.{CirceSupport, SecureUtil}
+import com.neo.sk.todos2018.utils.CirceSupport
 import com.sun.xml.internal.ws.encoding.soap.DeserializationException
 import io.circe.generic.auto._
 import io.circe.parser.decode
