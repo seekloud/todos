@@ -15,8 +15,9 @@ import org.scalajs.dom.html.Input
 import scala.concurrent.ExecutionContext.Implicits.global
 /**
   * Created by haoshuhan on 2018/6/4.
+  * changed by Xu Si-ran on 2019/3/21
   */
-class TaskList(username: String) extends Index{
+object TaskList extends Index{
   val taskList = Var(List.empty[(String, Long)])
   var inputValue = ""
 
@@ -94,21 +95,8 @@ class TaskList(username: String) extends Index{
     </div>
   }
 
-  def logout(): Unit = {
-    Http.getAndParse[SuccessRsp](Routes.User.logout).map {
-      case Right(rsp) =>
-        if(rsp.errCode == 0) {
-          JsFunc.alert("退出成功")
-          dom.window.location.hash = s"#/Login"
-        } else {
-          JsFunc.alert("退出失败")
-          println(s"logout error, ${rsp.msg}")
-        }
-
-      case Left(e) =>
-        println(s"parse error,$e ")
-    }
-  }
+  //函数待补充
+  def logout(): Unit = {}
 
   def app: xml.Node = {
    getList

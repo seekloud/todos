@@ -41,16 +41,6 @@ object AppSettings {
   val httpHost = appConfig.getString("http.host")
   val httpDomain =appConfig.getString("http.domain")
 
-  //用户注册信息
-  val userMap = {
-    import collection.JavaConverters._
-    val users = appConfig.getStringList("user.users").asScala
-    val pwd = appConfig.getStringList("user.pwd").asScala
-    require(users.length == pwd.length, "userList.length and pwd.length not equal.")
-    users.zip(pwd).toMap
-  }
-
-
   val slickConfig = config.getConfig("slick.db")
   val slickUrl = slickConfig.getString("url")
   val slickUser = slickConfig.getString("user")

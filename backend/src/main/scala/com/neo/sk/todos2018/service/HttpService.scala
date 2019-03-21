@@ -11,7 +11,6 @@ import scala.concurrent.ExecutionContextExecutor
 
 
 trait HttpService extends ResourceService
-  with UserService
   with ToDoListService
 {
 
@@ -32,7 +31,7 @@ trait HttpService extends ResourceService
         pathEndOrSingleSlash {
           getFromResource("html/index.html")
         } ~
-          resourceRoutes ~ userRoutes ~ listRoutes
+          resourceRoutes ~ listRoutes
       }
     }
 
