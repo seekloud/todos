@@ -4,13 +4,8 @@ import akka.http.scaladsl.model.{ContentTypes, HttpEntity, HttpResponse}
 import akka.http.scaladsl.server
 import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server.ValidationRejection
-import com.neo.sk.todos2018.common.AppSettings
 import com.neo.sk.todos2018.utils.CirceSupport
 import com.sun.xml.internal.ws.encoding.soap.DeserializationException
-import io.circe.generic.auto._
-import io.circe.parser.decode
-import io.circe.Error
-import io.circe.Decoder
 import org.slf4j.LoggerFactory
 
 import scala.concurrent.Future
@@ -37,8 +32,6 @@ object ServiceUtils {
 
 trait
 ServiceUtils extends CirceSupport {
-
-  import ServiceUtils._
 
   def htmlResponse(html: String): HttpResponse = {
     HttpResponse(entity = HttpEntity(ContentTypes.`text/html(UTF-8)`, html))

@@ -1,10 +1,9 @@
 package com.neo.sk.todos2018.service
 
-import akka.actor.{ActorRef, ActorSystem, Scheduler}
+import akka.actor.{ActorSystem, Scheduler}
 import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server.Route
-import akka.stream.scaladsl.{Flow, Sink, Source}
-import akka.stream.{Materializer, OverflowStrategy}
+import akka.stream.Materializer
 import akka.util.Timeout
 
 import scala.concurrent.ExecutionContextExecutor

@@ -4,17 +4,14 @@ import akka.actor.Scheduler
 import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server.Route
 import akka.util.Timeout
-import org.slf4j.LoggerFactory
 import com.neo.sk.todos2018.Boot.executor
 import com.neo.sk.todos2018.models.dao.ToDoListDAO
-import com.neo.sk.todos2018.ptcl.UserProtocol.UserBaseInfo
-import com.neo.sk.todos2018.service.SessionBase.ToDoListSession
+import com.neo.sk.todos2018.ptcl.Protocols.parseError
 import com.neo.sk.todos2018.shared.ptcl.ToDoListProtocol.{AddRecordReq, DelRecordReq, GetListRsp}
 import com.neo.sk.todos2018.shared.ptcl.{ErrorRsp, SuccessRsp}
+import org.slf4j.LoggerFactory
 
-import scala.concurrent.Future
 import scala.language.postfixOps
-import com.neo.sk.todos2018.ptcl.Protocols.parseError
 
 /**
   * User: sky

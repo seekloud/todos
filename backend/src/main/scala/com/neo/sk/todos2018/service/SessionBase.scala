@@ -2,14 +2,14 @@ package com.neo.sk.todos2018.service
 
 import akka.http.scaladsl.server
 import akka.http.scaladsl.server.Directives._
-import akka.http.scaladsl.server.{Directive, Directive1, RequestContext}
 import akka.http.scaladsl.server.directives.BasicDirectives
+import akka.http.scaladsl.server.{Directive, Directive1, RequestContext}
 import com.neo.sk.todos2018.common.AppSettings
 import com.neo.sk.todos2018.ptcl.UserProtocol.UserBaseInfo
 import com.neo.sk.todos2018.shared.ptcl.ErrorRsp
-import com.neo.sk.todos2018.utils.{CirceSupport, SessionSupport}
-import org.slf4j.LoggerFactory
+import com.neo.sk.todos2018.utils.SessionSupport
 import io.circe.generic.auto._
+import org.slf4j.LoggerFactory
 /**
   * User: Taoz
   * Date: 12/4/2016
