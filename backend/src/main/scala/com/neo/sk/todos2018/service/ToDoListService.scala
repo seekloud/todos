@@ -15,6 +15,7 @@ import com.neo.sk.todos2018.shared.ptcl.{ErrorRsp, SuccessRsp}
 import scala.concurrent.Future
 import scala.language.postfixOps
 import com.neo.sk.todos2018.ptcl.Protocols.parseError
+
 /**
   * User: sky
   * Date: 2018/6/1
@@ -32,46 +33,51 @@ trait ToDoListService extends ServiceUtils with SessionBase {
 
   private val log = LoggerFactory.getLogger(getClass)
 
-  private val addRecord=(path("addRecord") & post) {
+  private val addRecord = (path("addRecord") & post) {
     entity(as[Either[Error, AddRecordReq]]) {
       case Left(error) =>
         log.warn(s"some error: $error")
         complete(parseError)
       case Right(req) =>
-        dealFutureResult(
-          ToDoListDAO.addRecord(req.record).map{ r=>
-            if(r>0){
+        dealFutureResult {
+          val author = "admin"
+          println(s"add record: ${req.content}")
+          ToDoListDAO.addRecord(author, req.content).map { r =>
+            if (r > 0) {
               complete(SuccessRsp())
-            }else{
-              complete(ErrorRsp(1000101,"add record error"))
+            } else {
+              complete(ErrorRsp(1000101, "add record error"))
             }
           }
-        )
+        }
     }
   }
 
-  private val delRecord=(path("delRecord") & post) {
+  private val delRecord = (path("delRecord") & post) {
     entity(as[Either[Error, DelRecordReq]]) {
       case Left(error) =>
         log.warn(s"some error: $error")
         complete(parseError)
       case Right(req) =>
-        dealFutureResult(
-          ToDoListDAO.delRecord(req.record,req.time).map{ r=>
-            if(r>0){
+        dealFutureResult {
+          val id = req.id
+          println(s"delete record: $id")
+          ToDoListDAO.delRecord(id).map { r =>
+            if (r > 0) {
               complete(SuccessRsp())
-            }else{
-              complete(ErrorRsp(1000101,"add record error"))
+            } else {
+              complete(ErrorRsp(1000101, "add record error"))
             }
           }
-        )
+        }
     }
   }
 
-  private val getList=(path("getList") & get) {
+  private val getList = (path("getList") & get) {
     dealFutureResult(
-      ToDoListDAO.getRecordList().map{ list=>
-        complete(GetListRsp(Some(list)))
+      ToDoListDAO.getRecordList.map { list =>
+        val data = list.map( r => (r.id, r.content, r.time))
+        complete(GetListRsp(Some(data)))
       }
     )
   }

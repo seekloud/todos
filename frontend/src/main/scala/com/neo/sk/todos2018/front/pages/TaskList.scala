@@ -16,12 +16,13 @@ import scala.concurrent.ExecutionContext.Implicits.global
 /**
   * Created by haoshuhan on 2018/6/4.
   * changed by Xu Si-ran on 2019/3/21
+  * update by zhangtao, 2019-3-23: record id.
   */
 object TaskList extends Index{
-  val taskList = Var(List.empty[(String, Long)])
+  val taskList = Var(List.empty[(Int, String, Long)])
   var inputValue = ""
 
-  def getDeleteButton(record: String, time: Long) =  <button class={deleteButton.htmlClass} onclick={()=>deleteRecord(record, time)}>删除</button>
+  def getDeleteButton(id: Int) =  <button class={deleteButton.htmlClass} onclick={()=>deleteRecord(id)}>删除</button>
 
   def addRecord: Unit = {
     val data = AddRecordReq(inputValue).asJson.noSpaces
@@ -40,8 +41,8 @@ object TaskList extends Index{
     }
   }
 
-  def deleteRecord(record: String, time: Long): Unit = {
-    val data = DelRecordReq(record, time).asJson.noSpaces
+  def deleteRecord(id: Int): Unit = {
+    val data = DelRecordReq(id).asJson.noSpaces
     Http.postJsonAndParse[SuccessRsp](Routes.List.delRecord, data).map {
       case Right(rsp) =>
         if(rsp.errCode == 0) {
@@ -83,9 +84,9 @@ object TaskList extends Index{
         </tr>
         {list.map {l =>
         <tr>
-          <td class={td.htmlClass}>{l._1}</td>
-          <td class={td.htmlClass}>{TimeTool.dateFormatDefault(l._2)}</td>
-          <td class={td.htmlClass}>{getDeleteButton(l._1, l._2)}</td>
+          <td class={td.htmlClass}>{l._2}</td>
+          <td class={td.htmlClass}>{TimeTool.dateFormatDefault(l._3)}</td>
+          <td class={td.htmlClass}>{getDeleteButton(l._1)}</td>
         </tr>
       }
         }

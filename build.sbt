@@ -3,7 +3,7 @@
 val scalaV = "2.12.8"
 
 val projectName = "todos2018"
-val projectVersion ="2018.05.25"
+val projectVersion = "2018.05.25"
 
 resolvers += Resolver.sonatypeRepo("snapshots")
 
@@ -18,9 +18,14 @@ def commonSettings = Seq(
   )
 )
 
-lazy val shared = (crossProject.crossType(CrossType.Pure) in file("shared"))
-  .settings(name := "shared")
-  .settings(commonSettings: _*)
+
+import sbtcrossproject.CrossPlugin.autoImport.{crossProject, CrossType}
+
+
+lazy val shared =
+  crossProject(JSPlatform, JVMPlatform)
+    .crossType(CrossType.Pure)
+    .settings(commonSettings: _*)
 
 lazy val sharedJvm = shared.jvm
 lazy val sharedJs = shared.js

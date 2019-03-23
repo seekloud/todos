@@ -32,3 +32,9 @@
   配置文件里有postgresql数据库的相关配置。
   数据库操作可以使用slick。
   
+  
+  
+## 参考链接
+* [scala-js](http://www.scala-js.org/doc/tutorial/basic/)
+* [akka-http](https://doc.akka.io/docs/akka-http/current/introduction.html)
+* [monadic-html](https://github.com/OlivierBlanvillain/monadic-html/blob/master/README.md)
