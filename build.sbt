@@ -1,6 +1,6 @@
 
 
-val scalaV = "2.12.6"
+val scalaV = "2.12.8"
 
 val projectName = "todos2018"
 val projectVersion ="2018.05.25"
