@@ -34,23 +34,12 @@ object AppSettings {
   val config = ConfigFactory.parseResources("product.conf").withFallback(ConfigFactory.load())
 
   val appConfig = config.getConfig("app")
-  val dependence = config.getConfig("dependence")
 
 
   val httpInterface = appConfig.getString("http.interface")
   val httpPort = appConfig.getInt("http.port")
   val httpHost = appConfig.getString("http.host")
   val httpDomain =appConfig.getString("http.domain")
-
-  //用户注册信息
-  val userMap = {
-    import collection.JavaConverters._
-    val users = appConfig.getStringList("user.users").asScala
-    val pwd = appConfig.getStringList("user.pwd").asScala
-    require(users.length == pwd.length, "userList.length and pwd.length not equal.")
-    users.zip(pwd).toMap
-  }
-
 
   val slickConfig = config.getConfig("slick.db")
   val slickUrl = slickConfig.getString("url")
@@ -74,15 +63,5 @@ object AppSettings {
     sessionEncryptData = sConf.getBoolean("encryptData")
   )
   val sessionTimeOut = sConf.getInt("sessionTimeOut")
-
-
-  val hestiaConfig = config.getConfig("hestia")
-  val hestiaProtocol = hestiaConfig.getString("protocol")
-  val hestiaHost = hestiaConfig.getString("host")
-  val hestiaPort = hestiaConfig.getString("port")
-  val hestiaDomain = hestiaConfig.getString("domain")
-  val hestiaAppId = hestiaConfig.getString("appId")
-  val hestiaSecureKey = hestiaConfig.getString("secureKey")
-  val hestiaAddress = hestiaConfig.getString("address")
 
 }

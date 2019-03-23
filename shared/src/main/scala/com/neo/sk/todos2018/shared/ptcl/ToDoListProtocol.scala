@@ -16,7 +16,7 @@ object ToDoListProtocol {
                          )
   //获得列表
   case class GetListRsp(
-                       list:List[(String,Long)],
+                       list:Option[List[(String,Long)]],
                        errCode:Int=0,
                        msg:String="Ok"
                        ) extends CommonRsp

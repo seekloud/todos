@@ -1,6 +1,6 @@
 
 
-val scalaV = "2.12.6"
+val scalaV = "2.12.8"
 
 val projectName = "todos2018"
 val projectVersion ="2018.05.25"
@@ -35,6 +35,7 @@ lazy val frontend = (project in file("frontend"))
       Seq(
         fullOptJS,
         fastOptJS,
+        scalaJSUseMainModuleInitializer,
         packageJSDependencies,
         packageMinifiedJSDependencies
       ).map(f => (crossTarget in f) ~= (_ / "sjsout"))
@@ -44,19 +45,15 @@ lazy val frontend = (project in file("frontend"))
     scalaJSUseMainModuleInitializer := true,
     //mainClass := Some("com.neo.sk.virgour.front.Main"),
     libraryDependencies ++= Seq(
-      "io.circe" %%% "circe-core" % "0.9.2" withSources(),
-      "io.circe" %%% "circe-generic" % "0.9.2",
-      "io.circe" %%% "circe-parser" % "0.9.2",
-      "org.scala-js" %%% "scalajs-dom" % "0.9.2",
-      "io.suzaku" %%% "diode" % "1.1.2",
-      //"com.lihaoyi" %%% "upickle" % upickleV,
+      "io.circe" %%% "circe-core" % "0.11.1" withSources(),
+      "io.circe" %%% "circe-generic" % "0.11.1",
+      "io.circe" %%% "circe-parser" % "0.11.1",
+      "org.scala-js" %%% "scalajs-dom" % "0.9.6",
+      "io.suzaku" %%% "diode" % "1.1.4",
       "com.lihaoyi" %%% "scalatags" % "0.6.7" withSources(),
       "com.github.japgolly.scalacss" %%% "core" % "0.5.5" withSources(),
-      //"org.scala-js" %%% "scalajs-java-time" % scalaJsJavaTime
-      //"com.lihaoyi" %%% "utest" % "0.3.0" % "test"
       "in.nvilla" %%% "monadic-html" % "0.4.0-RC1" withSources(),
-      "com.lihaoyi" %%% "scalatags" % "0.6.7" withSources(),
-      "com.github.japgolly.scalacss" %%% "core" % "0.5.5" withSources()
+
     )
   )
   .dependsOn(sharedJs)

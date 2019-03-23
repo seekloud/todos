@@ -16,40 +16,41 @@ import scala.collection.mutable
   * User: sky
   * Date: 2018/6/1
   * Time: 15:17
+  * changed by Xu Si-ran, delete user
   */
 object ToDoListDAO {
   private val log = LoggerFactory.getLogger(this.getClass)
-  private val listMap:mutable.HashSet[(String,String,Long)]=mutable.HashSet() //(name,record,time)
+  private val list:mutable.HashSet[(String,Long)]=mutable.HashSet() //(record,time)
 
-  def addRecord(userName:String,record:String)={
+  def addRecord(record:String)={
     try {
-      listMap.add(userName,record,System.currentTimeMillis())
-      Future(1)
+      list.add(record,System.currentTimeMillis())
+      Future.successful(1)
     } catch {
       case  e: Throwable =>
         log.error(s"add record error with error $e")
-        Future(-1)
+        Future.successful(-1)
     }
   }
 
-  def delRecord(userName:String,record:String,time:Long)={
+  def delRecord(record:String,time:Long)={
     try {
-      listMap.remove(userName,record,time)
-      Future(1)
+      list.remove(record,time)
+      Future.successful(1)
     } catch {
       case  e: Throwable =>
         log.error(s"del record error with error $e")
-        Future(-1)
+        Future.successful(-1)
     }
   }
 
-  def getRecordList(userName:String)={
+  def getRecordList()={
     try{
-      Future(listMap.filter(_._1==userName).map(r=>(r._2,r._3)).toList.sortBy(_._2))
+      Future.successful(list.map(r=>(r._1,r._2)).toList.sortBy(_._2))
     } catch {
       case e: Throwable=>
         log.error(s"get recordList error with error $e")
-        Future(Nil)
+        Future.successful(Nil)
     }
   }
 
