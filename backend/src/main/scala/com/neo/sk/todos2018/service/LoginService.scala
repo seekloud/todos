@@ -40,7 +40,7 @@ trait LoginService extends ServiceUtils with SessionBase {
         log.warn(s"error in userLogin: $error")
         complete(parseError)
       case Right(req) =>
-        if(req.userName == userName || req.userName == "test2"){
+        if(req.userName == userName){
           val session = ToDoListSession(UserBaseInfo(req.userName), System.currentTimeMillis())
           addSession(session.toSessionMap){
             complete(SuccessRsp())
