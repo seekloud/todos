@@ -61,9 +61,9 @@ object ToDoListDAO {
     }
   }
 
-  def getRecordList: Future[List[Record]] = {
+  def getRecordList(author: String): Future[List[Record]] = {
     try {
-      Future.successful(recordList.values.toList.sortBy(_.time))
+      Future.successful(recordList.filter(list => list._2.author == author).values.toList.sortBy(_.time))
     } catch {
       case e: Throwable =>
         log.error(s"get recordList error with error $e")

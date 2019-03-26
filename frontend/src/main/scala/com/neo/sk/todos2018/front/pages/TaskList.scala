@@ -3,7 +3,7 @@ package com.neo.sk.todos2018.front.pages
 import com.neo.sk.todos2018.front.{Index, Routes}
 import com.neo.sk.todos2018.front.utils.{Http, JsFunc, TimeTool}
 import com.neo.sk.todos2018.shared.ptcl.SuccessRsp
-import com.neo.sk.todos2018.shared.ptcl.ToDoListProtocol.{AddRecordReq, DelRecordReq, GetListRsp}
+import com.neo.sk.todos2018.shared.ptcl.ToDoListProtocol.{AddRecordReq, DelRecordReq, GetListRsp, TaskRecord}
 import mhtml._
 import io.circe.generic.auto._
 import io.circe.syntax._
@@ -19,7 +19,7 @@ import scala.concurrent.ExecutionContext.Implicits.global
   * update by zhangtao, 2019-3-23: record id.
   */
 object TaskList extends Index{
-  val taskList = Var(List.empty[(Int, String, Long)])
+  val taskList = Var(List.empty[TaskRecord])
   var inputValue = ""
 
   def getDeleteButton(id: Int) =  <button class={deleteButton.htmlClass} onclick={()=>deleteRecord(id)}>删除</button>
@@ -84,9 +84,9 @@ object TaskList extends Index{
         </tr>
         {list.map {l =>
         <tr>
-          <td class={td.htmlClass}>{l._2}</td>
-          <td class={td.htmlClass}>{TimeTool.dateFormatDefault(l._3)}</td>
-          <td class={td.htmlClass}>{getDeleteButton(l._1)}</td>
+          <td class={td.htmlClass}>{l.content}</td>
+          <td class={td.htmlClass}>{TimeTool.dateFormatDefault(l.time)}</td>
+          <td class={td.htmlClass}>{getDeleteButton(l.id)}</td>
         </tr>
       }
         }
@@ -96,8 +96,21 @@ object TaskList extends Index{
     </div>
   }
 
-  //函数待补充
-  def logout(): Unit = {}
+  def logout(): Unit = {
+    Http.getAndParse[SuccessRsp](Routes.Login.userLogout).map{
+      case Right(rsp) =>
+        if(rsp.errCode == 0){
+          JsFunc.alert("退出成功")
+          taskList := Nil
+          dom.window.location.hash = "/Login"
+        }
+        else{
+          JsFunc.alert(s"退出失败：${rsp.msg}")
+        }
+      case Left(error) =>
+        JsFunc.alert(s"parse error,$error")
+    }
+  }
 
   def app: xml.Node = {
    getList

@@ -1,7 +1,7 @@
 package com.neo.sk.todos2018.front
 
 import cats.Show
-import com.neo.sk.todos2018.front.pages.TaskList
+import com.neo.sk.todos2018.front.pages.{Login, TaskList}
 import mhtml.mount
 import org.scalajs.dom
 import com.neo.sk.todos2018.front.utils.{Http, JsFunc, PageSwitcher}
@@ -19,8 +19,8 @@ object Main extends PageSwitcher {
     println(s"currentPage change to ${ls.mkString(",")}")
     ls match {
       case "List" :: Nil => TaskList.app
-
-      case _ => TaskList.app
+      case "Login" :: Nil => Login.app
+      case _ => Login.app
     }
 
   }

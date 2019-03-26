@@ -17,8 +17,13 @@ object ToDoListProtocol {
   case class DelRecordReq(id: Int)
 
   //获得列表
+  case class TaskRecord(
+    id: Int,
+    content: String,
+    time: Long,
+  )
   case class GetListRsp(
-    list: Option[List[(Int, String, Long)]],
+    list: Option[List[TaskRecord]],
     errCode: Int = 0,
     msg: String = "Ok"
   ) extends CommonRsp
