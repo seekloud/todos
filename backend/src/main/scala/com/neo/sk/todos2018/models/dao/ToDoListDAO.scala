@@ -1,7 +1,8 @@
 package com.neo.sk.todos2018.models.dao
 
 import org.slf4j.LoggerFactory
-
+import com.neo.sk.todos2018.utils.DBUtil.db
+import slick.jdbc.PostgresProfile.api._
 import scala.collection.mutable
 import scala.concurrent.Future
 
@@ -12,24 +13,30 @@ import scala.concurrent.Future
   * changed by Xu Si-ran, delete user
   * update by Tao 2019-3-23, add Record class and rename list to recordList.
   */
-case class Record(id: Int, time: Long, author: String, content: String)
+case class Record(id: Int, author: String, content: String, time: Long)
 
+trait FetchInfoDAOTable{
+  import com.neo.sk.todos2018.utils.DBUtil.driver.api._
 
-object ToDoListDAO {
-  private val log = LoggerFactory.getLogger(this.getClass)
+  class RecordInfoTable(tag: Tag) extends Table[Record](tag, "RECORD_INFO") {
+    def * = (id, author, content, time) <> (Record.tupled, Record.unapply)
 
-  private val recordList: mutable.TreeMap[Int, Record] = new mutable.TreeMap()
-  private var currentId = 1
+    val id = column[Int]("ID", O.AutoInc, O.PrimaryKey)
+    val author = column[String]("AUTHOR")
+    val content = column[String]("CONTENT")
+    val time = column[Long]("TIME")
 
-  private def getNextId(): Int = {
-    val nextId = currentId
-    currentId += 1
-    nextId
   }
+
+  protected val recordInfoTableQuery = TableQuery[RecordInfoTable]
+}
+
+
+object ToDoListDAO extends FetchInfoDAOTable{
+  private val log = LoggerFactory.getLogger(this.getClass)
 
   def addRecord(author: String, content: String): Future[Int] = {
     try {
-
       if (author.length == 0 ) {
         log.error(s"empty author")
         Future.successful(-1)
@@ -37,12 +44,8 @@ object ToDoListDAO {
         log.error(s"empty content")
         Future.successful(-1)
       } else {
-        val id = getNextId()
-        recordList.put(id, Record(id, System.currentTimeMillis(), author, content))
-        Future.successful(1)
+        db.run(recordInfoTableQuery.map(t => (t.author, t.content, t.time)) += (author, content, System.currentTimeMillis()))
       }
-
-
     } catch {
       case e: Throwable =>
         log.error(s"add record error with error $e")
@@ -52,7 +55,7 @@ object ToDoListDAO {
 
   def delRecord(id: Int): Future[Int] = {
     try {
-      recordList.remove(id)
+      // 待补充
       Future.successful(1)
     } catch {
       case e: Throwable =>
@@ -61,9 +64,9 @@ object ToDoListDAO {
     }
   }
 
-  def getRecordList(author: String): Future[List[Record]] = {
+  def getRecordList(author: String): Future[Seq[Record]] = {
     try {
-      Future.successful(recordList.filter(list => list._2.author == author).values.toList.sortBy(_.time))
+      db.run(recordInfoTableQuery.filter(t => t.author === author).result)
     } catch {
       case e: Throwable =>
         log.error(s"get recordList error with error $e")

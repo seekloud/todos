@@ -52,6 +52,7 @@ object Dependencies {
   val postgresql = "org.postgresql" % "postgresql" % "42.2.5"
   val asynchttpclient = "org.asynchttpclient" % "async-http-client" % "2.8.1"
   val ehcache = "net.sf.ehcache" % "ehcache" % "2.10.6"
+  val h2Database = "com.h2database" % "h2" % "1.4.196"
 
 
 
@@ -72,7 +73,8 @@ object Dependencies {
         Dependencies.codec,
         Dependencies.postgresql,
         Dependencies.asynchttpclient,
-        Dependencies.ehcache
+        Dependencies.ehcache,
+        Dependencies.h2Database
       )
 
 
