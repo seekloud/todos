@@ -34,7 +34,7 @@
 
 * 多用户用户登入流程
 
-  用户的登录可以使用session，也可以使用localStorage。
+  用户的登录可以使用session。
   session可以认为是放在cookie里的一个参数Map，todos2018的session Map定义在backend\src\main\scala\com\neo\sk\todos2018\service\SessionBase.scala。
   可以参考backend\src\main\scala\com\neo\sk\todos2018\utils\SessionSupport.scala里的函数添加删除session。
   使用SessionBase.scala的userAuth函数检验session。
