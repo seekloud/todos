@@ -1,6 +1,6 @@
 package com.neo.sk.todos2018.front.pages
 
-import com.neo.sk.todos2018.front.{Index, Routes}
+import com.neo.sk.todos2018.front.Routes
 import com.neo.sk.todos2018.front.utils.{Http, JsFunc, TimeTool}
 import com.neo.sk.todos2018.shared.ptcl.SuccessRsp
 import com.neo.sk.todos2018.shared.ptcl.ToDoListProtocol.{AddRecordReq, DelRecordReq, GetListRsp, TaskRecord}

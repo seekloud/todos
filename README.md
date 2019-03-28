@@ -26,6 +26,12 @@
 * 添加代办事项使用了H2数据库，数据库路径、账号、密码写在配置文件里面。
 * 数据库表的创建可以在H2的Web Console里进行，这个工程的示例H2数据库的版本是1.4.196。ps：也可以摸索地在IDEA上直接操作数据库
 
+## 3.28
+
+* Login的样式是backend\src\main\resources\css里的css文件写的
+* TaskList的样式是front\styles里的scalacss文件写的
+* 删除了Index特质
+
 ## 待完成功能tip
 
 * 用户登录校验
