@@ -18,7 +18,9 @@ import scala.concurrent.ExecutionContext.Implicits.global
   * Date: 2019/3/26
   * Time: 17:40
   */
-object Login extends Index{
+object Login{
+
+  val url = "#/" + "Login"
 
   private def userLogin(): Unit ={
     val userName = dom.document.getElementById("userName").asInstanceOf[Input].value
@@ -37,7 +39,7 @@ object Login extends Index{
     }
   }
 
-  override def app: Node =
+  def app: Node =
     <div>
       <div class = "LoginForm">
         <h2>欢迎登陆</h2>

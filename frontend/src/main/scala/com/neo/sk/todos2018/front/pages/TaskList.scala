@@ -18,7 +18,10 @@ import scala.concurrent.ExecutionContext.Implicits.global
   * changed by Xu Si-ran on 2019/3/21
   * update by zhangtao, 2019-3-23: record id.
   */
-object TaskList extends Index{
+object TaskList{
+
+  val url = "#/" + "List"
+
   val taskList = Var(List.empty[TaskRecord])
   var inputValue = ""
 
