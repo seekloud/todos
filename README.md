@@ -21,7 +21,7 @@
 
 ## 3.27添加事项
 
-* 用户的账号写死在了LoginService里面（账号只有‘test’），登录后用session存储了账号信息（账号名称）。
+* 用户的账号写死在了LoginService里面（账号只有‘test’,密码为空），登录后用session存储了账号信息（账号名称）。
 * 在ToDoListService里面有验证session的操作，即userAuth函数如何使用。
 * 添加代办事项使用了H2数据库，数据库路径、账号、密码写在配置文件里面。
 * 数据库表的创建可以在H2的Web Console里进行，这个工程的示例H2数据库的版本是1.4.196。ps：也可以摸索地在IDEA上直接操作数据库
