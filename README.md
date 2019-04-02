@@ -17,7 +17,8 @@
      * sbt:todos2018> reStart
 * 工程默认运行在30330端口，浏览器输入http://localhost:30330/todos2018；
 * 在浏览器上使用；
-* 端口等数据写在配置文件里，配置文件目录：backend/src/main/resources/application.conf；
+* 端口、数据库等数据写在配置文件里，配置文件目录：backend/src/main/resources/application.conf；
+* 数据库路径为相对路径，实际操作最好改为绝对路径，即DATA/H2/todos2018文件在自己电脑的绝对路径
 
 ## 3.27添加事项
 

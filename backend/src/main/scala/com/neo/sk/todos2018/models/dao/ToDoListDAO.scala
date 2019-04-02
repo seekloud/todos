@@ -12,6 +12,7 @@ import scala.concurrent.Future
   * Time: 15:17
   * changed by Xu Si-ran, delete user
   * update by Tao 2019-3-23, add Record class and rename list to recordList.
+  * 以下用slick操作数据库，若出现找不到表的情况，需要修改配置文件数据库的路径为绝对路径（没有..）
   */
 case class Record(id: Int, author: String, content: String, time: Long)
 
