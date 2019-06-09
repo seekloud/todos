@@ -23,24 +23,28 @@ object TaskList{
   val url = "#/" + "List"
 
   val taskList = Var(List.empty[TaskRecord])
-  var inputValue = ""
 
   def getDeleteButton(id: Int) =  <button class={deleteButton.htmlClass} onclick={()=>deleteRecord(id)}>删除</button>
 
   def addRecord: Unit = {
-    val data = AddRecordReq(inputValue).asJson.noSpaces
-    Http.postJsonAndParse[SuccessRsp](Routes.List.addRecord, data).map {
-      case Right(rsp) =>
-        if(rsp.errCode == 0) {
-          JsFunc.alert("添加成功！")
-          getList
-        } else {
-          JsFunc.alert("添加失败！")
-          println(rsp.msg)
-        }
+    val data = dom.document.getElementById("taskInput").asInstanceOf[Input].value
+    if (data == ""){
+      JsFunc.alert("输入框不能为空！")
+    }
+    else{
+      Http.postJsonAndParse[SuccessRsp](Routes.List.addRecord, AddRecordReq(data).asJson.noSpaces).map {
+        case Right(rsp) =>
+          if(rsp.errCode == 0) {
+            JsFunc.alert("添加成功！")
+            getList
+          } else {
+            JsFunc.alert("添加失败！")
+            println(rsp.msg)
+          }
 
-      case Left(error) =>
-        println(s"parse error,$error")
+        case Left(error) =>
+          println(s"parse error,$error")
+      }
     }
   }
 
@@ -122,7 +126,7 @@ object TaskList{
       <button class={logoutButton.htmlClass} onclick={()=>logout()}>退出</button></div>
     <div style="margin:30px;font-size:25px;">任务记录</div>
     <div style="margin-left:30px;">
-      <input class={input.htmlClass} onchange={(e: dom.Event) => inputValue = e.target.asInstanceOf[Input].value}></input>
+      <input id ="taskInput" class={input.htmlClass}></input>
     <button class={addButton.htmlClass} onclick={()=>addRecord}>+添加</button>
     </div>
     {taskListRx}

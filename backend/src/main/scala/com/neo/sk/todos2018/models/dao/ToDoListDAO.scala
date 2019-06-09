@@ -2,6 +2,7 @@ package com.neo.sk.todos2018.models.dao
 
 import org.slf4j.LoggerFactory
 import com.neo.sk.todos2018.utils.DBUtil.db
+import com.neo.sk.todos2018.models.SlickTables._
 import slick.jdbc.PostgresProfile.api._
 import scala.collection.mutable
 import scala.concurrent.Future
@@ -14,26 +15,26 @@ import scala.concurrent.Future
   * update by Tao 2019-3-23, add Record class and rename list to recordList.
   * 以下用slick操作数据库，若出现找不到表的情况，需要修改配置文件数据库的路径为绝对路径（没有..）
   */
-case class Record(id: Int, author: String, content: String, time: Long)
+//case class Record(id: Int, author: String, content: String, time: Long)
+//
+//trait FetchInfoDAOTable{
+//  import com.neo.sk.todos2018.utils.DBUtil.driver.api._
+//
+//  class RecordInfoTable(tag: Tag) extends Table[Record](tag, "RECORD_INFO") {
+//    def * = (id, author, content, time) <> (Record.tupled, Record.unapply)
+//
+//    val id = column[Int]("ID", O.AutoInc, O.PrimaryKey)
+//    val author = column[String]("AUTHOR")
+//    val content = column[String]("CONTENT")
+//    val time = column[Long]("TIME")
+//
+//  }
+//
+//  protected val recordInfoTableQuery = TableQuery[RecordInfoTable]
+//}
 
-trait FetchInfoDAOTable{
-  import com.neo.sk.todos2018.utils.DBUtil.driver.api._
 
-  class RecordInfoTable(tag: Tag) extends Table[Record](tag, "RECORD_INFO") {
-    def * = (id, author, content, time) <> (Record.tupled, Record.unapply)
-
-    val id = column[Int]("ID", O.AutoInc, O.PrimaryKey)
-    val author = column[String]("AUTHOR")
-    val content = column[String]("CONTENT")
-    val time = column[Long]("TIME")
-
-  }
-
-  protected val recordInfoTableQuery = TableQuery[RecordInfoTable]
-}
-
-
-object ToDoListDAO extends FetchInfoDAOTable{
+object ToDoListDAO{
   private val log = LoggerFactory.getLogger(this.getClass)
 
   def addRecord(author: String, content: String): Future[Int] = {
@@ -45,7 +46,7 @@ object ToDoListDAO extends FetchInfoDAOTable{
         log.error(s"empty content")
         Future.successful(-1)
       } else {
-        db.run(recordInfoTableQuery.map(t => (t.author, t.content, t.time)) += (author, content, System.currentTimeMillis()))
+        db.run(tRecordInfo.map(t => (t.author, t.content, t.time)) += (author, content, System.currentTimeMillis()))
       }
     } catch {
       case e: Throwable =>
@@ -65,9 +66,9 @@ object ToDoListDAO extends FetchInfoDAOTable{
     }
   }
 
-  def getRecordList(author: String): Future[Seq[Record]] = {
+  def getRecordList(author: String): Future[Seq[rRecordInfo]] = {
     try {
-      db.run(recordInfoTableQuery.filter(t => t.author === author).result)
+      db.run(tRecordInfo.filter(t => t.author === author).result)
     } catch {
       case e: Throwable =>
         log.error(s"get recordList error with error $e")

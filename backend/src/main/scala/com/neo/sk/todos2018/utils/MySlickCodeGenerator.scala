@@ -17,14 +17,18 @@ object MySlickCodeGenerator {
   import concurrent.ExecutionContext.Implicits.global
 
 
-  val slickDriver = "slick.jdbc.PostgresProfile"
-  val jdbcDriver = "org.postgresql.Driver"
+//  val slickDriver = "slick.jdbc.PostgresProfile"
+//  val jdbcDriver = "org.postgresql.Driver"
 //  val url = "jdbc:postgresql://10.1.29.247:5432/todos2018"
-  val url = "jdbc:postgresql://localhost:5432/todos2018"
+//  val url = "jdbc:postgresql://localhost:5432/todos2018"
+
+  val slickDriver = "slick.jdbc.H2Profile"
+  val jdbcDriver = "org.h2.Driver"
+  val url = "jdbc:h2:file:./DATA/H2/todos2018" //注意相对路径，会根据电脑系统的不同和启动路径的不同而发生变化
   val outputFolder = "target/gencode/genTablesPsql"
   val pkg = "com.neo.sk.todos2018.models"
   val user = "todos2018"
-  val password = "noData"
+  val password = "todos2018"
 
   //val dbDriver = MySQLDriver
 
@@ -97,7 +101,7 @@ object MySlickCodeGenerator {
 
   def main(args: Array[String]) {
     //genDefaultTables()
-    val dbDriver = slick.jdbc.PostgresProfile
+    val dbDriver = slick.jdbc.H2Profile
 
     genCustomTables(dbDriver)
 
