@@ -19,6 +19,9 @@
 * 在浏览器上使用；
 * 端口、数据库等数据写在配置文件里，配置文件目录：backend/src/main/resources/application.conf；
 * 数据库路径为相对路径，实际操作最好改为绝对路径，即DATA/H2/todos2018文件在自己电脑的绝对路径
+* 操作数据库现在使用的是Slick，Slick的代码结构在backend\src\main\scala\com\neo\sk\todos2018\models\SlickTables.scala。
+  这是backend\src\main\scala\com\neo\sk\todos2018\utils\MySlickCodeGenerator.scala生成的。
+  MySlickCodeGenerator可以右键直接运行
 
 ## 3.27添加事项
 
@@ -32,6 +35,11 @@
 * Login的样式是backend\src\main\resources\css里的css文件写的
 * TaskList的样式是front\styles里的scalacss文件写的
 * 删除了Index特质
+
+## 6.9
+
+* 修复了输入框会保存以前数据的bug
+* 添加了Slick框架自动生成的机制
 
 ## 待完成功能tip
 
